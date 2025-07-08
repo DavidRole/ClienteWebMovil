@@ -2,62 +2,70 @@
   <div class="container">
     <div class="grid">
       <article class="card" *ngFor="let item of itemsList">
-        <img class="card__image" src="{{item.imageUrl}}" />
+        <img class="card__image" [src]="item.imageUrl" />
         <div class="card__data">
           <div class="card__info">
-            <h2>{{item.name}}</h2>
+            <h2>{{ item.name }}</h2>
           </div>
-          <h3 class="card__price">₡{{item.price}}</h3>
-          <button (click)=" openModal(item.id)" class="card__add">+</button>
+          <h3 class="card__price">₡{{ item.price }}</h3>
+
+          <!-- Botón que abre el modal y añade al carrito -->
+          <button
+            class="card__add OpenModal"
+            (click)="openModal(item.id)"
+          >+</button>
         </div>
 
-        <div class="modal-backdrop fade show" *ngIf="showModal[item.id]"></div>
+        <!-- Sólo existe cuando showModal[item.id] === true -->
+        <ng-container *ngIf="showModal[item.id]">
+          <!-- Backdrop -->
+          <div class="modal-backdrop fade show"></div>
 
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">{{item.name}}</h4>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                ></button>
-              </div>
-
-              <div class="modal-body">
-                <p>{{item.name}} has been added to your cart.</p>
-                <p><strong>Price:</strong> ₡{{item.price}}</p>
-                <p [innerText]="item.description"></p>
-                <div class="form-floating">
-                  <input
-                    type="number"
-                    name="quantity"
-                    id="quantity-{{ item.id }}"
-                    min="1"
-                    max="10"
-                    [(ngModel)]="quantities[item.id]"
-                    class="form-control"
-                  />
-                  <label for="quantity-{{ item.id }}" class="form-label">
-                    Quantity
-                  </label>
+          <!-- Modal -->
+          <div class="modal d-block fade show" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">{{ item.name }}</h4>
+                  <button
+                    type="button"
+                    class="btn-close CloseModal"
+                    (click)="closeModal(item.id)"
+                  ></button>
                 </div>
-              </div>
 
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-bs-dismiss="modal"
-                  (click)="closeModal(item.id)"
-                >
-                  Close
-                </button>
+                <div class="modal-body">
+                  <p>{{ item.name }} has been added to your cart.</p>
+                  <p><strong>Price:</strong> ₡{{ item.price }}</p>
+                  <p [innerText]="item.description"></p>
+                  <div class="form-floating">
+                    <input
+                      type="number"
+                      min="1"
+                      max="10"
+                      [(ngModel)]="quantities[item.id]"
+                      class="form-control"
+                      id="quantity-{{ item.id }}"
+                    />
+                    <label for="quantity-{{ item.id }}" class="form-label">
+                      Quantity
+                    </label>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger CloseModal"
+                    (click)="closeModal(item.id)"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </article>
     </div>
   </div>
