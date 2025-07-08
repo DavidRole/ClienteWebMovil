@@ -40,7 +40,7 @@ export class Login {
         document.cookie = `Token=${token}; path=/; Secure; SameSite=Lax`;
 
         // 3) redirige a la página principal
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       },
       error: err => {
         console.error('Login fallido', err);
