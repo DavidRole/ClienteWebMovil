@@ -77,7 +77,6 @@ body {
    height: 230px;
    border: 1px solid lavender;
    border-radius: 0 0px 80px 0;
-   background-image: url();
    transform: rotate(10deg);
    object-fit: cover;
 }
