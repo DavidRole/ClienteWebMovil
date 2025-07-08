@@ -15,4 +15,11 @@ export class Master {
   login(loginObj: any) {
     return this.http.post('http://localhost:5136/api/auth/login', loginObj);
   }
+  register(registerObj: any) {
+    return this.http.post('http://localhost:5136/api/auth/register', registerObj);
+  }
+  
+  placeOrder(orderPayload: any) {
+    return this.http.post('http://localhost:5136/api/order', orderPayload);
+  }
 }

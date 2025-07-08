@@ -9,7 +9,7 @@
             <p [innerText]="item.description"></p>
           </div>
           <h3 class="card__price">₡{{item.price}}</h3>
-          <button class="card__add">+</button>
+          <button (click)="add(item.id, item.name)" class="card__add">+</button>
         </div>
       </article>
     </div>

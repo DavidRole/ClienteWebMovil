@@ -1,1 +1,76 @@
-<p>register works!</p>
+<div class="container">
+  <div
+    class="d-flex align-items-center justify-content-center min-vh-100 py-5"
+    style="margin-top: -80px; margin-bottom: -120px"
+  >
+    <div class="row w-100 justify-content-center">
+      <div
+        class="card border-primary shadow-md rounded-4 p-4 mt-0"
+        style="width: 90%; max-width: 400px"
+      >
+        <h2 class="text-center justify-content-center text-primary mb-3">
+          Welcome to the Chifrijo Bell Registration Page
+        </h2>
+
+        <form id="account" method="post" action="/register">
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                type="text"
+                id="username"
+                name="username"
+                required
+              />
+              <label for="username" class="text">First Name:</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                type="text"
+                id="username"
+                name="username"
+                required
+              />
+              <label for="username" class="text">Last Name:</label>
+            </div>
+            <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
+            <label for="email" class="text">Email:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="adress"
+              id="adress"
+              name="adress"
+              required
+            />
+            <label for="Adress">Adress:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
+            <label for="password">Password:</label>
+          </div>
+
+          <div class="container-fluid text-center">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+        <br>
+        <p>Already have an account? <a routerLink="/login" class="text-primary">Login here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
