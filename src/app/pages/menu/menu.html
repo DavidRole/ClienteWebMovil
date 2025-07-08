@@ -2,23 +2,20 @@
   <div class="container">
     <div class="grid">
       <article class="card" *ngFor="let item of itemsList">
-        <div class="card-body">
-          <div class="card__image">
-            <img
-              src="https://davidsfelipe-001-site1.ltempurl.com/{{item.imageUrl}}"
-              alt="{{item.name}} photo"
-            />
-          </div>
-          <div class="card__info">
-            <div class="car__info--title">
-              <h3>{{item.name}}</h3>
+        <div class="cont">
+        <div class="product-card">
+            <div class="product-card__image">
+                <img src="https://davidsfelipe-001-site1.ltempurl.com/{{item.imageUrl}}" alt="{{item.name}}">
             </div>
-            <div class="card__info--price">
-              <p>₡{{item.price}}</p>
-              <button class="btn btn-primary" (click)="openModal(item.id)">+</button>
+            <div class="product-card__info">
+                <h2 class="product-card__title">{{item.name}}</h2>
+                <div class="product-card__price-row">
+                    <span class="product-card__price">₡{{item.price}}</span>
+                    <button class="product-card__btn" (click)="openModal(item.id)">Add to Cart</button>
+                </div>
             </div>
-          </div>
         </div>
+    </div>
 
         <!-- Sólo renderizamos backdrop + modal si showModal true -->
         <ng-container *ngIf="showModal[item.id]">
