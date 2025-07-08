@@ -9,7 +9,7 @@
         style="width: 90%; max-width: 400px"
       >
         <div class="card-body text-center">
-          <form (ngSubmit)="onLogin()">
+          <form id="account" method="post" action="/login">
             <h3>Use your account to log in</h3>
             <hr />
 
@@ -69,6 +69,7 @@
                 id="login-submit"
                 type="submit"
                 class="w-100 btn btn-lg btn-primary"
+                (click)="onLogin()"
               >
                 Log in
               </button>
