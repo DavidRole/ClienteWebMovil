@@ -9,17 +9,17 @@ export class Master {
   constructor(private http: HttpClient) { }
 
   getDishes() {
-    return this.http.get<any[]>('http://localhost:5136/api/test/dishes');
+    return this.http.get<any[]>('https://davidsfelipe-001-site1.ltempurl.com/api/test/dishes');
   }
 
   login(loginObj: any) {
-    return this.http.post('http://localhost:5136/api/auth/login', loginObj);
+    return this.http.post('https://davidsfelipe-001-site1.ltempurl.com/api/auth/login', loginObj);
   }
   register(registerObj: any) {
-    return this.http.post('http://localhost:5136/api/auth/register', registerObj);
+    return this.http.post('https://davidsfelipe-001-site1.ltempurl.com/api/auth/register', registerObj);
   }
   
   placeOrder(orderPayload: any) {
-    return this.http.post('http://localhost:5136/api/order', orderPayload);
+    return this.http.post('https://davidsfelipe-001-site1.ltempurl.com/api/order', orderPayload);
   }
 }
