@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   selector: 'app-root',
   // importa aquí solo los directorios standalone que necesita tu template
-  imports: [ RouterOutlet, FormsModule ],
+  imports: [ RouterModule, FormsModule ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

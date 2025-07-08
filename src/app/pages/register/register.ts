@@ -10,7 +10,7 @@ import { Master } from '../../services/master.service';
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })
-export class RegisterComponent {
+export class Register{
   registerObj: any = {
     firstName: '',
     lastName:  '',
