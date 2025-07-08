@@ -9,7 +9,7 @@ export class Master {
   constructor(private http: HttpClient) { }
 
   getDishes() {
-    return this.http.get<any[]>('https://davidsfelipe-001-site1.ltempurl.com/api/test/dishes');
+    return this.http.get<any[]>('https://davidsfelipe-001-site1.ltempurl.com/api/dish');
   }
 
   login(loginObj: any) {
