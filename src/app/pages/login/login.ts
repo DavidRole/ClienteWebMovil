@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 export class Login {
 
   loginObj: any = {
-      "email": "",
+      "username": "",
       "password": ""
   }
 
