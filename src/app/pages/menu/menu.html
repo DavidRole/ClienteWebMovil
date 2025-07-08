@@ -8,21 +8,17 @@
             <h2>{{ item.name }}</h2>
           </div>
           <h3 class="card__price">₡{{ item.price }}</h3>
-
-          <!-- Botón que abre el modal y añade al carrito -->
+          <!-- Botón que abre modal -->
           <button
             class="card__add OpenModal"
             (click)="openModal(item.id)"
           >+</button>
         </div>
 
-        <!-- Sólo existe cuando showModal[item.id] === true -->
+        <!-- Sólo renderizamos backdrop + modal si showModal true -->
         <ng-container *ngIf="showModal[item.id]">
-          <!-- Backdrop -->
           <div class="modal-backdrop fade show"></div>
-
-          <!-- Modal -->
-          <div class="modal d-block fade show" tabindex="-1">
+          <div class="modal d-block fade show" tabindex="-1" id="modal-{{item.id}}">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -33,7 +29,6 @@
                     (click)="closeModal(item.id)"
                   ></button>
                 </div>
-
                 <div class="modal-body">
                   <p>{{ item.name }} has been added to your cart.</p>
                   <p><strong>Price:</strong> ₡{{ item.price }}</p>
@@ -52,7 +47,6 @@
                     </label>
                   </div>
                 </div>
-
                 <div class="modal-footer">
                   <button
                     type="button"
@@ -66,6 +60,7 @@
             </div>
           </div>
         </ng-container>
+
       </article>
     </div>
   </div>

@@ -7,7 +7,7 @@ import { CartService } from '../../services/cart-service';
 @Component({
   standalone: true,
   selector: 'app-menu',
-  imports: [CommonModule, FormsModule],
+  imports: [ CommonModule, FormsModule ],
   templateUrl: './menu.html',
   styleUrls: ['./menu.css']
 })
@@ -24,18 +24,23 @@ export class Menu implements OnInit {
   ngOnInit(): void {
     this.masterSrv.getDishes().subscribe({
       next: (res: any) => {
-        // Chequeo de seguridad
-        if (res && Array.isArray(res.data)) {
-          this.itemsList = res.data;
-          // Inicializo cantidades y estado de modal
-          this.itemsList.forEach(item => {
-            this.quantities[item.id] = 1;
-            this.showModal[item.id] = false;
-          });
-        } else {
-          console.error('Formato inesperado de datos:', res);
-          this.itemsList = [];
+        // Detectar si la respuesta es un array directo o viene en res.data
+        const dishes: any[] = Array.isArray(res)
+          ? res
+          : Array.isArray(res.data)
+            ? res.data
+            : [];
+
+        if (!dishes.length) {
+          console.error('No se obtuvo un arreglo de platos:', res);
         }
+
+        this.itemsList = dishes;
+        // Inicializar cantidades y showModal
+        this.itemsList.forEach(item => {
+          this.quantities[item.id] = 1;
+          this.showModal[item.id] = false;
+        });
       },
       error: err => console.error('Error al cargar platos', err)
     });
@@ -48,7 +53,9 @@ export class Menu implements OnInit {
   }
 
   openModal(id: number) {
-    this.add(id, this.itemsList.find(i => i.id === id)?.name || '');
+    // añade al carrito y abre el modal
+    const item = this.itemsList.find(i => i.id === id);
+    if (item) this.add(id, item.name);
     this.showModal[id] = true;
   }
 
