@@ -1,1 +1,98 @@
-<p>register works!</p>
+<div class="container">
+  <div
+    class="d-flex align-items-center justify-content-center min-vh-100 py-5"
+    style="margin-top: -80px; margin-bottom: -120px"
+  >
+    <div class="row w-100 justify-content-center">
+      <div
+        class="card border-primary shadow-md rounded-4 p-4 mt-0"
+        style="width: 90%; max-width: 400px"
+      >
+        <h2 class="text-center justify-content-center text-primary mb-3">
+          Welcome to the Chifrijo Bell Registration Page
+        </h2>
+
+        <form id="account" method="post" action="/register">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="text"
+              id="FirstName"
+              name="FirstName"
+                [(ngModel)]="registerObj.FirstName"
+              placeholder="First Name"
+              required
+            />
+            <label class="form-label" for="FirstName" class="text"
+              >First Name</label
+            >
+            <span id="firstNameError" class="text-danger"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="text"
+              id="LastName"
+              name="LastName"
+                [(ngModel)]="registerObj.LastName"
+              placeholder="Last Name"
+              required
+            />
+            <label class="form-label" for="LastName" class="text"
+              >Last Name</label
+            >
+            <span id="lastNameError" class="text-danger"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="email"
+              id="email"
+              name="email"
+                [(ngModel)]="registerObj.email"
+              placeholder="Email"
+              required
+            />
+            <label class="form-label" for="email" class="text">Email</label>
+            <span id="emailError" class="text-danger"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="address"
+              id="address"
+              name="address"
+                [(ngModel)]="registerObj.address"
+              placeholder="Address"
+              required
+            />
+            <label class="form-label" for="address">Address</label>
+            <span id="addressError" class="text-danger"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="password"
+              id="password"
+              name="password"
+                [(ngModel)]="registerObj.password"
+              placeholder="Password"
+              required
+            />
+            <label class="form-label" for="password">Password</label>
+            <span id="passwordError" class="text-danger"></span>
+          </div>
+
+          <div class="container-fluid text-center">
+            <button type="submit" (click)="onRegister()" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+        <br />
+        <p>
+          Already have an account?
+          <a routerLink="/login" class="text-primary">Login here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

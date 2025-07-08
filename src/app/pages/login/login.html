@@ -17,7 +17,8 @@
               <input
                 id="email"
                 name="email"
-                type="email" [(ngModel)]="loginObj.email"
+                type="email"
+                [(ngModel)]="loginObj.email"
                 class="form-control"
                 placeholder="Email"
                 required
@@ -30,7 +31,8 @@
               <input
                 id="password"
                 name="password"
-                type="password" [(ngModel)]="loginObj.password"
+                type="password"
+                [(ngModel)]="loginObj.password"
                 class="form-control"
                 placeholder="Password"
                 autocomplete="current-password"
@@ -40,48 +42,43 @@
               <span id="passwordError" class="text-danger"></span>
             </div>
 
-            <div class="form-check mb-3">
+            <div class="form-check mb-3 d-flex justify-content-center">
               <input
                 id="rememberMe"
                 name="rememberMe"
                 type="checkbox"
                 class="form-check-input"
               />
-              <label for="rememberMe" class="form-check-label">
+              <label for="rememberMe" class="form-check-label ms-2 mb-0">
                 Remember me
               </label>
+            </div>
+
+            <div class="text-center mb-3">
+              <a
+                routerLink='/register'
+                class="text-primary"
+                style="text-decoration: none"
+              >
+                Create an account
+              </a>
             </div>
 
             <div class="mb-3">
               <button
                 id="login-submit"
                 type="submit"
-                class="w-100 btn btn-lg btn-primary" (click)="onLogin()"
+                class="w-100 btn btn-lg btn-primary"
+                (click)="onLogin()"
               >
                 Log in
               </button>
             </div>
 
-            <div class="text-center">
-              <p>
-                <!-- <a href="/register?returnUrl={{returnUrl}}">
-                  Register as a new user
-                </a> -->
-              </p>
-            </div>
+            
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <footer
-    class="border-top footer mt-auto bg-body"
-    style="position: fixed; bottom: 0; width: 100%; height: 2rem"
-  >
-    <div class="container">
-      &copy; 2025 – Chifrijo Bell
-      <a href="privacy.html">Credits</a>
-    </div>
-  </footer>
-</div>

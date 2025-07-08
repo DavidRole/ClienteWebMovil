@@ -1,24 +1,17 @@
-<p>cart works!</p>
-
-<div class="container mt-4">
-  <h1 class="text-center mb-4">My Cart</h1>
-
-  <h2 class="text-left mb-3">Dishes</h2>
-<div class="row">
-<div class="col-3 " ngFor = "let">
-
-</div>
-
-<div class="card" style="width: 400px">
-  <img class="card-img-top" [src]="" alt="Card image" />
-  <div class="card-body">
-    <h4 class="card-title">Nombre del plato</h4>
-    <p class="card-text">Precio del plato.</p>
-    <a href="#" class="btn btn-danger">Eliminar</a>
+<div *ngIf="items.length; else empty">
+  <div *ngFor="let item of items" class="p-2 flex items-center justify-between">
+    <span>{{ item.name }}</span>
+    <input
+      type="number"
+      [value]="item.quantity"
+      (change)="changeQty(item.dishId, $any($event.target).value)"
+      min="1"
+      class="w-16 mx-2"
+    />
+    <button (click)="remove(item.dishId)" class="btn btn-danger">×</button>
   </div>
+  <button (click)="placeOrder()" class="mt-4 btn-primary">Place Order</button>
 </div>
-
-</div>
-
-  
-</div>
+<ng-template #empty>
+  <p>The cart is empty</p>
+</ng-template>
