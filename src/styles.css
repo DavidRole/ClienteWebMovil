@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+.full-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 5rem 0;
+  margin-top: -80px;
+  margin-bottom: -120px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.auth-card {
+  border: 0;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card-body {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.form-row {
+  display: flex;
+  justify-content: center;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.auth-title {
+  margin-bottom: 1.5rem;
+  color: #0d6efd;
+  font-size: 2rem;
+}
+
+.auth-subtitle {
+  margin-bottom: 1.5rem;
+  color: #6c757d;
+}
+
+.auth-input {
+  font-size: .875rem;
+  padding: .25rem .5rem;
+  line-height: 1.5;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  width: 50%;
+}
+
+.auth-button {
+  padding: .375rem 1.5rem;
+  background-color: #0d6efd;
+  border: none;
+  border-radius: .25rem;
+  color: #fff;
+  cursor: pointer;
+}
+.auth-button:hover {
+  background-color: #0b5ed7;
+}
