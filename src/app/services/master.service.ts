@@ -79,7 +79,7 @@ export class Master {
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.post<any>(`${this.baseUrl}/auth/update`, updateObj, {
+    return this.http.post<any>(`${this.baseUrl}/auth/profile`, updateObj, {
       headers,
     });
   }
