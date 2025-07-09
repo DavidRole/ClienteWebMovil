@@ -1,94 +1,101 @@
+// src/app/pages/update/update.ts
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule }        from '@angular/forms';
+import { CommonModule }       from '@angular/common';
+import { Router }             from '@angular/router';
+
 import { Master, UpdateResponse } from '../../services/master.service';
-import { CommonModule } from '@angular/common';
+import { Auth }            from '../../services/auth';
 
 @Component({
-  standalone: true,
-  selector: 'app-update',
-  imports: [FormsModule, CommonModule],
+  standalone:  true,
+  selector:    'app-update',
+  imports:     [ FormsModule, CommonModule ],
   templateUrl: './update.html',
-  styleUrl: './update.css',
+  styleUrls:   ['./update.css'],
 })
 export class Update implements OnInit {
   updateObj: any = {
     firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
+    lastName:  '',
+    email:     '',
+    address:   '',
   };
-
   changePassword: any = {
     oldPassword: '',
     newPassword: '',
   };
-
   showModal = false;
 
-  constructor(private masterSrv: Master) {}
+  constructor(
+    private masterSrv: Master,
+    private auth:      Auth,
+    private router:    Router
+  ) {}
 
   ngOnInit(): void {
-    this.updateObj = this.masterSrv.getProfile();
-    if (!this.updateObj) {
-      console.error('No profile data found');
+    // 1) Protege el acceso
+    if (!this.auth.isAuthenticated()) {
+      this.router.navigate(['/login']);
       return;
     }
+
+    // 2) Obtiene el perfil del servidor
+    this.masterSrv.getProfile().subscribe({
+      next: (profile: any) => {
+        this.updateObj = profile;
+      },
+      error: (err: any) => {
+        console.error('Error cargando perfil', err);
+        if (err.status === 401) {
+          this.router.navigate(['/login']);
+        }
+      }
+    });
   }
 
-  onUpdate() {
+  onUpdate(): void {
     this.masterSrv.updateProfile(this.updateObj).subscribe({
       next: (res: UpdateResponse) => {
         const { token, expiration } = res;
-
         if (!token || !expiration) {
-          console.error('Nothing was received');
+          console.error('No se recibió token o expiration');
           return;
         }
-
-        localStorage.setItem('token', token);
+        localStorage.setItem('token',      token);
         localStorage.setItem('expiration', expiration);
-        console.log('Token guardado:', localStorage.getItem('token'));
-        console.log('Expiration guardada:', localStorage.getItem('expiration'));
+        console.log('Perfil y token actualizados');
       },
-      error: (err) => {
-        console.error('Login failed', err);
-      },
+      error: (err) => console.error('Error actualizando perfil', err)
     });
   }
 
-  onChangePassword() {
+  onChangePassword(): void {
     this.masterSrv.changePassword(this.changePassword).subscribe({
       next: (res: UpdateResponse) => {
         const { token, expiration } = res;
-
         if (!token || !expiration) {
-          console.error('Nothing was received');
+          console.error('No se recibió token o expiration');
           return;
         }
-
-        localStorage.setItem('token', token);
+        localStorage.setItem('token',      token);
         localStorage.setItem('expiration', expiration);
-        console.log('Token guardado:', localStorage.getItem('token'));
-        console.log('Expiration guardada:', localStorage.getItem('expiration'));
         this.closeModal();
+        console.log('Contraseña y token actualizados');
       },
-      error: (err) => {
-        console.error('Login failed', err);
-      },
+      error: (err) => console.error('Error cambiando contraseña', err)
     });
   }
 
-  logOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
-    alert('Logged out successfully');
+  logOut(): void {
+    this.auth.logout();
   }
 
-  openModal() {
+  openModal(): void {
     this.showModal = true;
   }
 
-  closeModal() {
+  closeModal(): void {
     this.showModal = false;
   }
 }

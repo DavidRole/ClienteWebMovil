@@ -14,6 +14,13 @@ export interface RegisterResponse extends AuthResponse {}
 
 export interface UpdateResponse extends AuthResponse {}
 
+export interface Profile {
+  email:     string;
+  firstName: string;
+  lastName:  string;
+  address:   string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -72,7 +79,7 @@ export class Master {
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.post<any>(`${this.baseUrl}/update`, updateObj, {
+    return this.http.post<any>(`${this.baseUrl}/auth/update`, updateObj, {
       headers,
     });
   }
@@ -91,7 +98,7 @@ export class Master {
     });
 
     return this.http.post<any>(
-      `${this.baseUrl}/change-password`,
+      `${this.baseUrl}/auth/change-password`,
       changePasswordObj,
       { headers }
     );
@@ -110,6 +117,6 @@ export class Master {
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.get<any>(`${this.baseUrl}/profile`, { headers });
+    return this.http.get<Profile>(`${this.baseUrl}/auth/profile`, { headers });
   }
 }
