@@ -67,10 +67,16 @@
                   <button
                     type="button"
                     class="btn btn-primary"
-                    (click)="add(item.id, item.name); closeModal(item.id)"
+                    (click)="
+                      $event.preventDefault();
+                      $event.stopPropagation();
+                      add(item.id, item.name);
+                      closeModal(item.id)
+                    "
                   >
                     Add
                   </button>
+
                   <button
                     type="button"
                     class="btn btn-danger"
