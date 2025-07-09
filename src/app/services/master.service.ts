@@ -51,7 +51,7 @@ export class Master {
   }
 
   placeOrder(orderPayload: any): Observable<any> {
-    const token = localStorage.getItem('Token');
+    const token = localStorage.getItem('token');
     if (!token) {
       console.log('Please log in to place an order.');
       return new Observable((observer) => {
@@ -68,7 +68,7 @@ export class Master {
   }
 
   updateProfile(updateObj: any): Observable<any> {
-    const token = localStorage.getItem('Token');
+    const token = localStorage.getItem('token');
     if (!token) {
       console.log('Please log in to place an order.');
       return new Observable((observer) => {
@@ -85,7 +85,7 @@ export class Master {
   }
 
   changePassword(changePasswordObj: any): Observable<any> {
-    const token = localStorage.getItem('Token');
+    const token = localStorage.getItem('token');
     if (!token) {
       console.log('Please log in to change your password.');
       return new Observable((observer) => {
@@ -105,7 +105,7 @@ export class Master {
   }
 
   getProfile(): any {
-    const token = localStorage.getItem('Token');
+    const token = localStorage.getItem('token');
     if (!token) {
       console.log('Please log in to change your password.');
       return new Observable((observer) => {
