@@ -6,13 +6,15 @@ import { Observable } from 'rxjs';
 export interface LoginResponse {
   result: boolean;
   token?: string;
-  data?: { token: string };
+  expiration?: string;
+  data?: { token: string, expiration: string };
 }
 
 export interface RegisterResponse {
   result: boolean;
   token?: string;
-  data?: { token: string };
+  expiration?: string;
+  data?: { token: string, expiration: string };
 }
 
 @Injectable({
@@ -51,6 +53,44 @@ export class Master {
     return this.http.post<any>(
       `${this.baseUrl}/order`,
       orderPayload,
+      { headers }
+    );
+  }
+
+  update(updateObj: any): Observable<any> {
+    
+    const token = localStorage.getItem('Token');
+    if (!token) {
+      console.log('Please log in to place an order.');
+      return new Observable(observer => {
+        observer.error('No token found');
+      });
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    
+    return this.http.post<any>(
+      `${this.baseUrl}/update`,
+      updateObj,
+      { headers }
+    );
+  }
+
+  changePassword(changePasswordObj: any): Observable<any> {
+    const token = localStorage.getItem('Token');
+    if (!token) {
+      console.log('Please log in to change your password.');
+      return new Observable(observer => {
+        observer.error('No token found');
+      });
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(
+      `${this.baseUrl}/change-password`,
+      changePasswordObj,
       { headers }
     );
   }
