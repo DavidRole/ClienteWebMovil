@@ -11,10 +11,14 @@
               />
             </div>
             <div class="product-card__info">
-              <h2 class="product-card__title">{{item.name}}</h2>
+              <h2 class="product-card__title">{{ item.name }}</h2>
               <div class="product-card__price-row">
-                <span class="product-card__price">₡{{item.price}}</span>
-                <button class="btn btn-primary" (click)="openModal(item.id)">
+                <span class="product-card__price">₡{{ item.price }}</span>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="openModal(item.id)"
+                >
                   Add to Cart
                 </button>
               </div>
@@ -28,7 +32,7 @@
           <div
             class="modal d-block fade show"
             tabindex="-1"
-            id="modal-{{item.id}}"
+            id="modal-{{ item.id }}"
           >
             <div class="modal-dialog">
               <div class="modal-content">
@@ -36,7 +40,7 @@
                   <h4 class="modal-title">{{ item.name }}</h4>
                   <button
                     type="button"
-                    class="btn-close CloseModal"
+                    class="btn-close"
                     (click)="closeModal(item.id)"
                   ></button>
                 </div>
@@ -50,7 +54,7 @@
                       min="1"
                       max="10"
                       [(ngModel)]="quantities[item.id]"
-                      name="quantity-{{item.id}}"
+                      name="quantity-{{ item.id }}"
                       class="form-control"
                       id="quantity-{{ item.id }}"
                     />
@@ -61,6 +65,7 @@
                 </div>
                 <div class="modal-footer btn-group">
                   <button
+                    type="button"
                     class="btn btn-primary"
                     (click)="add(item.id, item.name); closeModal(item.id)"
                   >
@@ -68,7 +73,7 @@
                   </button>
                   <button
                     type="button"
-                    class="btn btn-danger CloseModal"
+                    class="btn btn-danger"
                     (click)="closeModal(item.id)"
                   >
                     Close
