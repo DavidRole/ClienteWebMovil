@@ -1,5 +1,5 @@
 // src/app/services/master.service.ts
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -19,7 +19,6 @@ export interface RegisterResponse {
   providedIn: 'root'
 })
 export class Master {
-
   private baseUrl = 'https://davidsfelipe-001-site1.ltempurl.com/api';
 
   constructor(private http: HttpClient) { }
@@ -37,6 +36,22 @@ export class Master {
   }
   
   placeOrder(orderPayload: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/order`, orderPayload);
+    
+    const token = localStorage.getItem('Token');
+    if (!token) {
+      alert('Please log in to place an order.');
+      return new Observable(observer => {
+        observer.error('No token found');
+      });
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    
+    return this.http.post<any>(
+      `${this.baseUrl}/order`,
+      orderPayload,
+      { headers }
+    );
   }
 }
