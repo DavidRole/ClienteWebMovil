@@ -39,6 +39,9 @@ export class Login {
       },
       error: (err) => {
         console.error('Login failed', err);
+        if (err.status === 401) {
+          alert('Your user is no able to log in, please check with an administrator.');
+        }
       },
     });
   }
