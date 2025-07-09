@@ -1,17 +1,19 @@
-<div *ngIf="items.length; else empty">
-  <div *ngFor="let item of items" class="p-2 flex items-center justify-between">
+<h2 class="text-primary">Cart</h2>
+
+<div class="container-fluid" *ngIf="items.length; else empty">
+  <div *ngFor="let item of items" class="btn-group form-floating p-2 flex items-center justify-between">
     <span>{{ item.name }}</span>
     <input
       type="number"
       [value]="item.quantity"
       (change)="changeQty(item.dishId, $any($event.target).value)"
       min="1"
-      class="w-16 mx-2"
+      class="w-16 mx-2 form-control text-center"
     />
     <button (click)="remove(item.dishId)" class="btn btn-danger">×</button>
   </div>
-  <button (click)="placeOrder()" class="mt-4 btn-primary">Place Order</button>
+  <button (click)="placeOrder()" class="mt-4 btn btn-primary">Place Order</button>
 </div>
 <ng-template #empty>
-  <p>The cart is empty</p>
+  <h3>The cart is empty</h3>
 </ng-template>

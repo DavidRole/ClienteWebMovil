@@ -54,7 +54,7 @@
                   </div>
                 </div>
                 <div class="modal-footer btn-group">
-                  <button class="btn btn-primary" (click)="add(item.id, item.name)">Add</button>
+                  <button class="btn btn-primary" (click)="add(item.id, item.name); closeModal(item.id)">Add</button>
                   <button
                     type="button"
                     class="btn btn-danger CloseModal"
