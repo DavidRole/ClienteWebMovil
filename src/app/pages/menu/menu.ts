@@ -38,7 +38,7 @@ export class Menu implements OnInit {
         this.itemsList = dishes;
         // Inicializar cantidades y showModal
         this.itemsList.forEach(item => {
-          this.quantities[item.id] = 1;
+          this.quantities[item.id] = 0;
           this.showModal[item.id] = false;
         });
       },
@@ -48,8 +48,9 @@ export class Menu implements OnInit {
 
   add(id: number, name: string) {
     const qty = this.quantities[id] || 1;
+    console.log(qty);
     this.cartSrv.addItem(id, name, qty);
-    this.quantities[id] = 0;
+    this.quantities[id] = 1;
   }
 
   openModal(id: number) {
