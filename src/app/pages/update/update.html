@@ -74,19 +74,14 @@
             <label class="form-label" for="address">Address</label>
             <span id="addressError" class="text-danger"></span>
           </div>
-          <div class="container-fluid text-center">
-            <button type="button" class="btn btn-primary" (click)="openModal()">
+          <div class="container-fluid text-center btn-group">
+            <button type="button" class="btn btn-secondary" (click)="openModal()">
               Update Password
             </button>
-          </div>
-
-          <div class="container-fluid text-center">
             <button type="submit" (click)="onUpdate()" class="btn btn-primary">
               Save Changes
             </button>
-          </div>
-          <div class="container-fluid text-center">
-            <button type="button" class="btn btn-primary" (click)="logOut()">
+            <button type="button" class="btn btn-danger" (click)="logOut()">
               Log Out
             </button>
           </div>
