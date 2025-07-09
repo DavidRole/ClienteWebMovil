@@ -26,6 +26,7 @@ export class Cart implements OnInit {
     this.items = this.cart.items;          // Cart is injected by now
     this.cart.items$.subscribe(v => this.items = v);
   }
+  
   changeQty(dishId: number, qty: string) {
     const q = parseInt(qty, 10);
     if (q > 0) this.cart.updateQuantity(dishId, q);

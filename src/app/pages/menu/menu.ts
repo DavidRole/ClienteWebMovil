@@ -32,7 +32,7 @@ export class Menu implements OnInit {
             : [];
 
         if (!dishes.length) {
-          console.error('No se obtuvo un arreglo de platos:', res);
+          console.error('There were no dishes available', res);
         }
 
         this.itemsList = dishes;
@@ -42,14 +42,14 @@ export class Menu implements OnInit {
           this.showModal[item.id] = false;
         });
       },
-      error: err => console.error('Error al cargar platos', err)
+      error: err => console.error('Error loading dishes', err)
     });
   }
 
   add(id: number, name: string) {
     const qty = this.quantities[id] || 1;
     this.cartSrv.addItem(id, name, qty);
-    this.quantities[id] = 1;
+    this.quantities[id] = 0;
   }
 
   openModal(id: number) {
