@@ -44,17 +44,12 @@ export class Menu implements OnInit {
   }
 
   add(id: number, name: string) {
-    console.log('▶️ add() called, qty before reset =', this.quantities[id]);
-    console.trace(); // 👉 esto te mostrará en la consola el stack trace de CADA llamada
     const qty = Number(this.quantities[id]) || 1;
     this.cartSrv.addItem(id, name, qty);
     this.quantities[id] = 1;
   }
 
   openModal(id: number) {
-    // añade al carrito y abre el modal
-    const item = this.itemsList.find((i) => i.id === id);
-    if (item) this.add(id, item.name);
     this.showModal[id] = true;
   }
 
