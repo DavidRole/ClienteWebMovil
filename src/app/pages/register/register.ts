@@ -22,7 +22,7 @@ export class Register {
   constructor(private masterSrv: Master, private router: Router) {}
 
   onRegister() {
-    this.masterSrv.login(this.registerObj).subscribe({
+    this.masterSrv.register(this.registerObj).subscribe({
       next: (res: RegisterResponse) => {
         const { token, expiration } = res;
 
