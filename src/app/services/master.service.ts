@@ -39,7 +39,7 @@ export class Master {
     
     const token = localStorage.getItem('Token');
     if (!token) {
-      alert('Please log in to place an order.');
+      console.log('Please log in to place an order.');
       return new Observable(observer => {
         observer.error('No token found');
       });
