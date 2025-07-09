@@ -7,19 +7,16 @@ import { CartService } from '../../services/cart-service';
 @Component({
   standalone: true,
   selector: 'app-menu',
-  imports: [ CommonModule, FormsModule ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './menu.html',
-  styleUrls: ['./menu.css']
+  styleUrls: ['./menu.css'],
 })
 export class Menu implements OnInit {
   itemsList: any[] = [];
   quantities: Record<number, number> = {};
   showModal: Record<number, boolean> = {};
 
-  constructor(
-    private masterSrv: Master,
-    private cartSrv: CartService
-  ) {}
+  constructor(private masterSrv: Master, private cartSrv: CartService) {}
 
   ngOnInit(): void {
     this.masterSrv.getDishes().subscribe({
@@ -28,8 +25,8 @@ export class Menu implements OnInit {
         const dishes: any[] = Array.isArray(res)
           ? res
           : Array.isArray(res.data)
-            ? res.data
-            : [];
+          ? res.data
+          : [];
 
         if (!dishes.length) {
           console.error('There were no dishes available', res);
@@ -37,25 +34,26 @@ export class Menu implements OnInit {
 
         this.itemsList = dishes;
         // Inicializar cantidades y showModal
-        this.itemsList.forEach(item => {
+        this.itemsList.forEach((item) => {
           this.quantities[item.id] = 0;
           this.showModal[item.id] = false;
         });
       },
-      error: err => console.error('Error loading dishes', err)
+      error: (err) => console.error('Error loading dishes', err),
     });
   }
 
   add(id: number, name: string) {
-    const qty = this.quantities[id] || 1;
-    console.log(qty);
+    console.log('▶️ add() called, qty before reset =', this.quantities[id]);
+    console.trace(); // 👉 esto te mostrará en la consola el stack trace de CADA llamada
+    const qty = Number(this.quantities[id]) || 1;
     this.cartSrv.addItem(id, name, qty);
     this.quantities[id] = 1;
   }
 
   openModal(id: number) {
     // añade al carrito y abre el modal
-    const item = this.itemsList.find(i => i.id === id);
+    const item = this.itemsList.find((i) => i.id === id);
     if (item) this.add(id, item.name);
     this.showModal[id] = true;
   }
