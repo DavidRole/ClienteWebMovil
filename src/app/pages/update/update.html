@@ -1,0 +1,158 @@
+<div class="container">
+  <div
+    class="d-flex align-items-center justify-content-center min-vh-100 py-5"
+    style="margin-top: -80px; margin-bottom: -120px"
+  >
+    <div class="row w-100 justify-content-center">
+      <div
+        class="card border-primary shadow-md rounded-4 p-4 mt-0"
+        style="width: 90%; max-width: 400px"
+      >
+        <h2 class="text-center justify-content-center text-primary mb-3">
+          User information update
+        </h2>
+
+        <form id="account" method="post" action="/update">
+          <br />
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="text"
+              id="FirstName"
+              name="FirstName"
+              value="{{updateObj.FirstName}}"
+              [(ngModel)]="updateObj.FirstName"
+              placeholder="First Name"
+              required
+            />
+            <label class="form-label" for="FirstName" class="text"
+              >First Name</label
+            >
+            <span id="firstNameError" class="text-danger"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="text"
+              id="LastName"
+              name="LastName"
+              value="{{updateObj.LastName}}"
+              [(ngModel)]="updateObj.LastName"
+              placeholder="Last Name"
+              required
+            />
+            <label class="form-label" for="LastName" class="text"
+              >Last Name</label
+            >
+            <span id="lastNameError" class="text-danger"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="email"
+              id="email"
+              name="email"
+              value="{{updateObj.email}}"
+              [(ngModel)]="updateObj.email"
+              placeholder="Email"
+              required
+            />
+            <label class="form-label" for="email" class="text">Email</label>
+            <span id="emailError" class="text-danger"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="address"
+              id="address"
+              name="address"
+              value="{{updateObj.address}}"
+              [(ngModel)]="updateObj.address"
+              placeholder="Address"
+              required
+            />
+            <label class="form-label" for="address">Address</label>
+            <span id="addressError" class="text-danger"></span>
+          </div>
+          <div class="container-fluid btn-group">
+            <button type="button" class="btn btn-primary" (click)="openModal()">
+              Update Password
+            </button>
+          </div>
+
+          <div class="container-fluid text-center">
+            <button type="submit" (click)="onUpdate()" class="btn btn-primary">
+              Save Changes
+            </button>
+          </div>
+
+          <ng-container *ngIf="showModal">
+            <div class="modal-backdrop fade show"></div>
+
+            <div
+              class="modal d-block fade show"
+              tabindex="-1"
+              id="modal-password"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Password Update</h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      (click)="closeModal()"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-floating mb-3">
+                      <input
+                        class="form-control"
+                        type="password"
+                        [(ngModel)]="changePassword.oldPassword"
+                        placeholder="Current Password"
+                        required
+                      />
+                      <label>Enter current Password</label>
+                      <span
+                        id="currentPasswordError"
+                        class="text-danger"
+                      ></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        class="form-control"
+                        type="password"
+                        [(ngModel)]="changePassword.newPassword"
+                        placeholder="New Password"
+                        required
+                      />
+                      <label>Enter New Password</label>
+                      <span id="passwordError" class="text-danger"></span>
+                    </div>
+                  </div>
+                  <div class="modal-footer btn-group">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="onChangePassword(); closeModal()"
+                    >
+                      Add
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="closeModal()"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

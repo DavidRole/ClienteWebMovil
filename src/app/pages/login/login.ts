@@ -26,25 +26,28 @@ export class Login {
   onLogin() {
     this.masterSrv.login(this.loginObj).subscribe({
       next: (res: LoginResponse) => {
-        // obtén el token, sea en res.token o en res.data.token
         const token = res.token ?? res.data?.token;
+        const expiration = res.expiration ?? res.data?.expiration;
+
         if (!token) {
           console.error('No se recibió token');
           return;
         }
+        if (!expiration) {
+          console.error('No se recibió expiration');
+          return;
+        }
 
-        // 1) guárdalo en localStorage
+        
         localStorage.setItem('Token', token);
+        localStorage.setItem('expiration', expiration);
         console.log('Token guardado:', localStorage.getItem('Token'));
+        console.log('Expiration guardada:', localStorage.getItem('expiration'));
 
-        // 2) opcional: cookie
-        document.cookie = `Token=${token}; path=/; Secure; SameSite=Lax`;
-
-        // 3) redirige a la página principal
         this.router.navigate(['/']);
       },
       error: err => {
-        console.error('Login fallido', err);
+        console.error('Login failed', err);
       }
     });
   }
