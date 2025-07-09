@@ -18,37 +18,28 @@ export class Login {
     password: '',
   };
 
-  constructor(
-    private masterSrv: Master,
-    private router: Router
-  ) {}
+  constructor(private masterSrv: Master, private router: Router) {}
 
   onLogin() {
     this.masterSrv.login(this.loginObj).subscribe({
       next: (res: LoginResponse) => {
-        const token = res.token ?? res.data?.token;
-        const expiration = res.expiration ?? res.data?.expiration;
+        const { token, expiration } = res;
 
-        if (!token) {
-          console.error('No se recibió token');
-          return;
-        }
-        if (!expiration) {
-          console.error('No se recibió expiration');
+        if (!token || !expiration) {
+          console.error('Nothing was received');
           return;
         }
 
-        
-        localStorage.setItem('Token', token);
+        localStorage.setItem('token', token);
         localStorage.setItem('expiration', expiration);
-        console.log('Token guardado:', localStorage.getItem('Token'));
+        console.log('Token guardado:', localStorage.getItem('token'));
         console.log('Expiration guardada:', localStorage.getItem('expiration'));
 
         this.router.navigate(['/']);
       },
-      error: err => {
+      error: (err) => {
         console.error('Login failed', err);
-      }
+      },
     });
   }
 }

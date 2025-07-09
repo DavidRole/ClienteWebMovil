@@ -38,21 +38,16 @@ export class Update implements OnInit {
   onUpdate() {
     this.masterSrv.updateProfile(this.updateObj).subscribe({
       next: (res: UpdateResponse) => {
-        const token = res.token ?? res.data?.token;
-        const expiration = res.expiration ?? res.data?.expiration;
+        const { token, expiration } = res;
 
-        if (!token) {
-          console.error('No se recibió token');
-          return;
-        }
-        if (!expiration) {
-          console.error('No se recibió expiration');
+        if (!token || !expiration) {
+          console.error('Nothing was received');
           return;
         }
 
-        localStorage.setItem('Token', token);
+        localStorage.setItem('token', token);
         localStorage.setItem('expiration', expiration);
-        console.log('Token guardado:', localStorage.getItem('Token'));
+        console.log('Token guardado:', localStorage.getItem('token'));
         console.log('Expiration guardada:', localStorage.getItem('expiration'));
       },
       error: (err) => {
@@ -64,21 +59,16 @@ export class Update implements OnInit {
   onChangePassword() {
     this.masterSrv.changePassword(this.changePassword).subscribe({
       next: (res: UpdateResponse) => {
-        const token = res.token ?? res.data?.token;
-        const expiration = res.expiration ?? res.data?.expiration;
+        const { token, expiration } = res;
 
-        if (!token) {
-          console.error('No se recibió token');
-          return;
-        }
-        if (!expiration) {
-          console.error('No se recibió expiration');
+        if (!token || !expiration) {
+          console.error('Nothing was received');
           return;
         }
 
-        localStorage.setItem('Token', token);
+        localStorage.setItem('token', token);
         localStorage.setItem('expiration', expiration);
-        console.log('Token guardado:', localStorage.getItem('Token'));
+        console.log('Token guardado:', localStorage.getItem('token'));
         console.log('Expiration guardada:', localStorage.getItem('expiration'));
         this.closeModal();
       },
@@ -86,6 +76,12 @@ export class Update implements OnInit {
         console.error('Login failed', err);
       },
     });
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+    alert('Logged out successfully');
   }
 
   openModal() {

@@ -15,6 +15,6 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: Update,
-    canActivate: [ AuthGuard ]    // ← aquí proteges la ruta
+    canActivate: [ AuthGuard ]
   }
 ];

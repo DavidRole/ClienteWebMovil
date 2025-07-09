@@ -16,9 +16,9 @@ export class Auth {
   }
 
   isAuthenticated(): boolean {
-    const t = this.token;
-    const exp = this.tokenExpiration;
-    return !!t && exp !== null && new Date() < exp;
+    const token = localStorage.getItem('token');
+    const exp = localStorage.getItem('expiration');
+    return !!token && !!exp && new Date() < new Date(exp);
   }
 
   ensureLoggedIn(): void {

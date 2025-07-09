@@ -3,25 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface LoginResponse {
-  result: boolean;
-  token?: string;
-  expiration?: string;
-  data?: { token: string; expiration: string };
+export interface AuthResponse {
+  token:      string;
+  expiration: string;  
 }
 
-export interface RegisterResponse {
-  result: boolean;
-  token?: string;
-  expiration?: string;
-  data?: { token: string; expiration: string };
-}
-export interface UpdateResponse {
-  result: boolean;
-  token?: string;
-  expiration?: string;
-  data?: { token: string; expiration: string };
-}
+export interface LoginResponse extends AuthResponse {}
+
+export interface RegisterResponse extends AuthResponse {}
+
+export interface UpdateResponse extends AuthResponse {}
 
 @Injectable({
   providedIn: 'root',
